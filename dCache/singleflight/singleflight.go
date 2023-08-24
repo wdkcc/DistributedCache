@@ -20,7 +20,7 @@ func (g *Group) Do(key string, fn func() (interface{}, error)) (interface{}, err
 	if g.m == nil {
 		g.m = make(map[string]*call)
 	}
-	// 2. 第一个进来的协程会发现key值不存在，后面进来的协程允许到这里时key值已经存在，就直接取出来
+	// 2. 第一个进来的协程会发现key值不存在，后面进来的协程运行到这里时key值已经存在，就直接取出来
 	if c, ok := g.m[key]; ok {
 		g.mu.Unlock()
 		c.wg.Wait()

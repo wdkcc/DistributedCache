@@ -40,7 +40,7 @@ func (g *Group) Get(key string) (ByteView, error) {
 		log.Println("[GeeCache] hit")
 		return v, nil
 	}
-	// 缓存区无数据，调用用户给的回调函数去获取数据
+	// 当前缓存区无数据，去其它结点查询数据
 	return g.load(key)
 }
 
